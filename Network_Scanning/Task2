@@ -1,0 +1,52 @@
+<h1>For deeper scan use: sudo nmap -sS 10.5.5.11</h1>
+Output from kali linux:
+<em>
+┌──(kali㉿Kali)-[~]
+└─$ sudo nmap -sS 10.5.5.11
+[sudo] password for kali: 
+Starting Nmap 7.94 ( https://nmap.org ) at 2024-09-18 18:19 UTC
+Nmap scan report for mutillidae.pc (10.5.5.11)
+Host is up (0.0000090s latency).
+Not shown: 998 closed tcp ports (reset)
+PORT     STATE SERVICE
+80/tcp   open  http
+3306/tcp open  mysql
+MAC Address: 02:42:0A:05:05:0B (Unknown)
+
+Nmap done: 1 IP address (1 host up) scanned in 0.38 seconds
+</em>
+Output Breakdown:
+Target: mutillidae.pc (10.5.5.11)
+
+Host: The target system is up with very low latency, meaning it responded quickly to the scan.
+
+Open Ports:
+
+Port 80 (HTTP): This port is open, which indicates a web server is running, potentially serving content via HTTP.
+Port 3306 (MySQL): This port is open, which indicates a MySQL database service is running and accessible.
+MAC Address: 02:42:0A:05:05:0B (Unknown vendor).
+
+Analysis of Detected Vulnerabilities:
+HTTP on Port 80:
+
+Risk: HTTP traffic is not encrypted, which could expose sensitive data transmitted between the client and server (such as usernames and passwords).
+Mitigation:
+Migrate the web service to HTTPS (Port 443) by installing an SSL/TLS certificate.
+Ensure the web server is up-to-date to avoid vulnerabilities such as cross-site scripting (XSS) or SQL injection.
+MySQL on Port 3306:
+
+Risk: MySQL is accessible from the network, which could allow unauthorized access to the database if proper security controls aren't in place. Attackers could exploit weak credentials or known vulnerabilities in older versions of MySQL.
+Mitigation:
+Restrict access to the MySQL port by configuring the firewall to allow connections only from trusted IP addresses.
+Ensure MySQL is running the latest version with security patches applied.
+Enforce strong authentication (e.g., complex passwords) and ensure encryption for database connections.
+Security Recommendations:
+Close Unnecessary Ports: If port 3306 doesn’t need to be exposed to the entire network, you should close it or restrict access via a firewall. Only allow trusted IP addresses to access this service.
+
+Harden Web Services: Since port 80 is open for HTTP, consider implementing HTTPS for secure communications, and ensure the web server software is kept up-to-date to mitigate known vulnerabilities.
+
+Add Firewall Rules:
+
+For web services, ensure the firewall allows only necessary traffic (e.g., only allow HTTP/HTTPS from specific trusted sources).
+Block all incoming traffic to unused ports, and limit the range of IP addresses allowed to access the MySQL database.
+Patch the System: Regularly update the web server and database software (e.g., Apache, Nginx, MySQL) to the latest versions. Patching ensures that any known vulnerabilities are addressed, reducing the risk of an attack.
