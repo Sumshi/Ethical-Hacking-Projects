@@ -1,0 +1,29 @@
+1) Install Firewall
+sudo apt update
+sudo apt install ufw
+2) Enable the firewall: sudo ufw enable
+3) Check the status of the firewall: sudo ufw status
+┌──(kali㉿Kali)-[~]
+└─$ sudo ufw status
+[sudo] password for kali: 
+Status: active
+
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW       Anywhere                  
+22/tcp (v6)                ALLOW       Anywhere (v6)  
+
+4) Deny incoming traffic
+To improve security, I set the default policy for incoming connections to be denied, except for those explicitly allowed
+┌──(kali㉿Kali)-[~]
+└─$ sudo ufw default deny incoming
+Default incoming policy changed to 'deny'
+(be sure to update your rules accordingly)
+
+┌──(kali㉿Kali)-[~]
+
+5)
+This setup strengthens the system’s security by enforcing strict rules for network traffic:
+
+Default deny rule minimizes exposure to attacks by blocking all unwanted traffic.
+Allow specific ports ensures that only necessary services are accessible while keeping the rest of the system secure. 
